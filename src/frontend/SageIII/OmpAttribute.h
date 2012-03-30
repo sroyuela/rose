@@ -1,3 +1,6 @@
+#ifndef OMP_ATTRIBUTE_HEADER
+#define OMP_ATTRIBUTE_HEADER
+
 /*!
  * ROSE persistent attribute to represent OpenMP 3.0 C/C++/Fortran directives
  * in the OpenMP parser 
@@ -424,3 +427,6 @@ namespace OmpSupport
 
 
 } //end namespace OmpSupport
+
+#endif
+

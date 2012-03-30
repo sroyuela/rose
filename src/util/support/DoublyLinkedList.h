@@ -112,6 +112,9 @@ class DoublyLinkedListWrap
 
     void Sort( MapObject<T, int>& f)
      {
+       /* JL (10/25/2011) Performing this operation on a empty DLL will result in SEGFAULT */
+       if(count == 0)
+          return;
        DoublyLinkedEntryWrap<T> **buf = new DoublyLinkedEntryWrap<T>*[count];
        for (size_t i = 0; i < count; ++i)
             buf[i] = 0;

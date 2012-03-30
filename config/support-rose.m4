@@ -162,6 +162,7 @@ fi
 
   ROSE_SUPPORT_UPC
   ROSE_SUPPORT_COMPASS2
+  ROSE_SUPPORT_UQTK
 
 ##
 #########################################################################################
@@ -2141,6 +2142,22 @@ projects/PolyhedralModel/docs/Makefile
 projects/PolyhedralModel/tests/Makefile
 projects/PolyhedralModel/tests/rose-pragma/Makefile
 projects/PolyhedralModel/tests/rose-max-cover/Makefile
+projects/UQ/Makefile
+projects/UQ/src/Makefile
+projects/UQ/test/Makefile
+projects/uniformSourceBinaryAnalysis/Makefile
+projects/uniformSourceBinaryAnalysis/src/Makefile
+projects/uniformSourceBinaryAnalysis/include/Makefile
+projects/uniformSourceBinaryAnalysis/test/Makefile
+projects/uniformSourceBinaryAnalysis/test/StructAnal/Makefile
+projects/FaultToleranceFramework/Makefile
+projects/FaultToleranceFramework/src/Makefile
+projects/FaultToleranceFramework/src/Algorithms/Makefile
+projects/FaultToleranceFramework/src/Analysis/Makefile
+projects/FaultToleranceFramework/src/Transform/Makefile
+projects/FaultToleranceFramework/test/Makefile
+projects/FaultToleranceFramework/test/Analysis/Makefile
+projects/FaultToleranceFramework/test/Transform/Makefile
 tests/Makefile
 tests/RunTests/Makefile
 tests/RunTests/A++Tests/Makefile

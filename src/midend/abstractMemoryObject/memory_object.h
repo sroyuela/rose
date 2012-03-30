@@ -99,6 +99,7 @@ namespace AbstractMemoryObject
   class LabeledAggregateField
   {
     public:
+      virtual ~LabeledAggregateField() {}
       virtual std::string getName(); // field name
       virtual size_t getIndex(); // The field's index within its parent object. The first field has index 0.
 
@@ -132,6 +133,7 @@ namespace AbstractMemoryObject
   class IndexVector
   {
     public:
+      virtual ~IndexVector() {}
       // the index vector's length
       size_t getSize();
       virtual std::string toString();

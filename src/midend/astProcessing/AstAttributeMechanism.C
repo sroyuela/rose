@@ -226,7 +226,8 @@ AstAttributeMechanism::AstAttributeMechanism ( const AstAttributeMechanism & X )
      for (const_iterator iter = X.begin(); iter != X.end(); iter++)
         {
        // Call the copy mechanism on the AstAttribute (virtual copy constructor)
-          this->insert(std::pair<std::string,AstAttribute*>( iter->first , iter->second->copy() ) );
+       //JL 12/01/2011: Don't copy NULL attributes.
+         this->insert(std::pair<std::string,AstAttribute*>( iter->first , (iter->second == NULL ? NULL : iter->second->copy()) ) );
         }
 #else
   // ((const AttributeMechanism<std::string,AstAttribute*>*) this) = X;

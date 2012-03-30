@@ -464,6 +464,7 @@ BinaryAnalysis::ControlFlow::build_cfg_from_ast(SgNode *root, ControlFlowGraph &
         T1(ControlFlow *analyzer, ControlFlowGraph &cfg, BlockVertexMap &bv_map)
             : analyzer(analyzer), cfg(cfg), bv_map(bv_map)
             {}
+        virtual ~T1() {}
         void visit(SgNode *node) {
             SgAsmBlock *block = isSgAsmBlock(node);
             if (block && !analyzer->is_vertex_filtered(block)) {

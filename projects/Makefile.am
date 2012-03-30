@@ -37,6 +37,7 @@ SUBDIRS = \
 	ManyCoreRuntime \
 	mint \
 	extractMPISkeleton \
+	FaultToleranceFramework \
 	$(OPTIONAL_PROJECTS)
 
 # DQ (9/26/2011): Directory removed for failing new AST consistancy test for references to deleted IR nodes.
@@ -71,7 +72,10 @@ if !ROSE_USING_BOOST_VERSION_1_36
 if !USING_GCC_4_0_4_BACKEND_COMPILER
 # DQ (4/8/2011): Directories of tests are a current problem for Insure++.
 if !ROSE_USE_INSURE
+# JL (3/29/2012): ...
+if !HAVE_YICES
    SUBDIRS += haskellport 
+endif
 endif
 endif
 endif
@@ -144,7 +148,18 @@ SUBDIRS += PolyhedralModel
 # DQ (9/12/2009): This was not added to ROSE correctly, please let me help you do this.
 #     StaticDynamicAnalysis/DynamicCPU
 
-EXTRA_DIST = StaticDynamicAnalysis
+if ROSE_BUILD_BINARY_ANALYSIS_SUPPORT
+	if HAVE_YICES
+		SUBDIRS += uniformSourceBinaryAnalysis
+	endif
+endif
+
+# JL (3/27/2012): The UQ translator requires the libUQ from SANDIA to compile...
+if ROSE_WITH_UQTK_INCLUDE
+	SUBDIRS += UQ
+endif
+
+EXTRA_DIST = StaticDynamicAnalysis uniformSourceBinaryAnalysis UQ
 
 
 check-local:

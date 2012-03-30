@@ -3152,6 +3152,30 @@ Grammar::buildCode ()
      ROSE_outputClassesAndFieldsSourceFile << outputClassesAndFields ( *rootNode );
 #endif
 
+  // JL (3/29/2012) Generate code for accessing and collecting node data in a uniform way.
+  // Currently disabled by default since its not tested properly.
+#if 0
+     this->maxNumberOfFunctions = 0;
+
+     string genClassMemberFuncCSourceFileName = string(getGrammarName()) + "ClassMemberFunc.C",
+            genClassMemberFuncHSourceFileName = string(getGrammarName()) + "ClassMemberFunc.h";
+     ofstream ROSE_classMemberDescC(string(target_directory+"/"+genClassMemberFuncCSourceFileName).c_str());
+     ofstream ROSE_classMemberDescH(string(target_directory+"/"+genClassMemberFuncHSourceFileName).c_str());
+     ROSE_ASSERT ((ROSE_classMemberDescC.good() == true) && (ROSE_classMemberDescH.good() == true));
+
+     cout << "Building class member description..." << endl;
+     vector<MFClassDescriptor *> classDescCollection;
+     map<string, Grammar::TYPE_CATEGORY> typeCategoryMap;
+     map<string, string> realTypeNameMap;
+     ROSE_ASSERT (initializeClassDesc());
+     ROSE_ASSERT (genClassDescriptionTerm(*rootNode, classDescCollection, typeCategoryMap, realTypeNameMap));
+     ROSE_ASSERT (genClassDescription(classDescCollection, typeCategoryMap, realTypeNameMap,
+                                      ROSE_classMemberDescC, ROSE_classMemberDescH));
+     ROSE_ASSERT (finalizeClassDesc());
+     ROSE_classMemberDescC.close();
+     ROSE_classMemberDescH.close();
+#endif
+
      return;
    }
 

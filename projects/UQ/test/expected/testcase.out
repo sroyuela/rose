@@ -1,0 +1,50 @@
+//#define PC_COMP
+#include <iostream>
+#include "PCSet.h"
+#ifdef PC_COMP
+     #include <sstream>
+#endif
+using namespace std;
+
+int main()
+{
+// Initialization of PC-based UQTK... 
+  int pcDimension = 3;
+  int pcOrder = 1;
+  class PCSet pc(pcOrder,pcDimension,"HG");
+  class UQTKArray1D< double  > tmpReg0 = UQTKArray1D< double > ::UQTKArray1D(pc. GetNumberPCTerms ());
+  #ifdef PC_COMP
+//Stochastic/PC portion of the code
+//Dimension
+//Order
+//# of basis functions
+  #endif
+  const double defaultVal = 1.0e0;
+//Kernel
+  const int N = 10;
+  const double ALPHA = 1.2;
+  class UQTKArray1D< double  > __x[10UL];
+  #ifdef PC_COMP
+  #else
+  double x[10UL];
+  class UQTKArray1D< double  > __y[10UL];
+  double y[10UL];
+  class UQTKArray1D< double  > __z[10UL];
+  double z[10UL];
+  for (int i = 0; i < N; i++) {
+    __x[i] = UQTKArray1D< double > ::UQTKArray1D(pc. GetNumberPCTerms (),defaultVal);
+    x[i] = defaultVal;
+    __y[i] = UQTKArray1D< double > ::UQTKArray1D(pc. GetNumberPCTerms (),defaultVal);
+    y[i] = defaultVal;
+    __z[i] = UQTKArray1D< double > ::UQTKArray1D(pc. GetNumberPCTerms (),defaultVal);
+    z[i] = defaultVal;
+  }
+  for (int i = 0; i < N; i++) {
+    pc. Add (pc. MultiplyScalar (__x[i],ALPHA,tmpReg0),__y[i],__z[i]);
+    z[i] = ((ALPHA * x[i]) + y[i]);
+  }
+//for(int i = 0; i < N; i++)
+//	cout << i << ") " << z[i] << " = " << ALPHA << "*" << x[i] << " + " << y[i] << endl;
+  #endif
+  return 0;
+}

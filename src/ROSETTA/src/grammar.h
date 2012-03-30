@@ -623,6 +623,59 @@ class Grammar
 
   // DQ (5/18/2007): support for documentation to handle mapping to KDM
      std::string outputClassesAndFields ( Terminal & node );
+
+  // JL (10/20/2011): functions to generate class type/hierarchy description and
+  // a uniform way of accessing class getter-functions (similar to the RTIMemberData).
+     unsigned int maxNumberOfFunctions;
+
+     typedef enum {
+          TCAT_NONE = 0,
+          TCAT_SGNODE = 1,
+          TCAT_BOOL = 2,
+          TCAT_CHAR = 3,
+          TCAT_FLOAT = 4,
+          TCAT_DOUBLE = 5,
+          TCAT_INT = 6,
+          TCAT_STD_CONT = 7
+     } TYPE_CATEGORY;
+
+     typedef struct _MFFUNCDESC {
+             std::string returnType, funcName;
+             TYPE_CATEGORY returnTypeCategory;
+             
+             _MFFUNCDESC(TYPE_CATEGORY returnTypeCategory, std::string returnType, std::string funcName) {
+                    this->returnTypeCategory = returnTypeCategory;
+                    this->returnType = returnType;
+                    this->funcName = funcName;
+             }
+     } MFFunctionDescriptor;
+     typedef struct _MFCLASSDESC {
+             TYPE_CATEGORY classTypeCategory;
+             std::string classType, baseClass;
+             std::vector<MFFunctionDescriptor *> *funcDesc;
+
+             _MFCLASSDESC(TYPE_CATEGORY classTypeCategory,
+                          std::string classType,
+                          std::string baseClass,
+                          std::vector<MFFunctionDescriptor *> *funcDesc) {
+                    this->classType = classType;
+                    this->baseClass = baseClass;
+                    this->funcDesc = funcDesc;
+                    this->classTypeCategory = classTypeCategory;
+             }
+     } MFClassDescriptor;
+
+     bool initializeClassDesc();
+     bool finalizeClassDesc();
+     bool genClassDescriptionTerm(Terminal &node,
+                                  std::vector<MFClassDescriptor *> &desc,
+                                  std::map<std::string, TYPE_CATEGORY> &typeCategoryMap,
+                                  std::map<std::string, std::string> &realTypeNameMap);
+     bool genClassDescription(std::vector<MFClassDescriptor *> &desc, 
+                              std::map<std::string, Grammar::TYPE_CATEGORY> &typeCategoryMap,
+                              std::map<std::string, std::string> &realTypeNameMap,
+                              std::ofstream &classMemberDescC, 
+                              std::ofstream &classMemberDescH);
    };
 
 // We need a defintion of an arbitrary identifier

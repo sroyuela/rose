@@ -1570,6 +1570,8 @@ IsGoto( const AstNodePtr& _s, AstNodePtr* dest)
     if (dest != 0) {
       SgNode* scope = 0;
       for (scope = s->get_parent(); ; scope = scope->get_parent()){
+        if(scope == NULL)
+          return false;
         int t = scope->variantT();
         if (t == V_SgForStatement || t == V_SgWhileStmt || 
             t == V_SgDoWhileStmt)
@@ -1587,6 +1589,8 @@ IsGoto( const AstNodePtr& _s, AstNodePtr* dest)
     if (dest != 0) {
       SgNode* scope = 0;
       for (scope = s->get_parent(); ; scope = scope->get_parent()){
+        if(scope == NULL)
+          return false;
         int t = scope->variantT();
         if (t == V_SgForStatement || t == V_SgWhileStmt || 
             t == V_SgDoWhileStmt || t == V_SgSwitchStatement)

@@ -2228,7 +2228,8 @@ Unparse_ExprStmt::unparseForStmt(SgStatement* stmt, SgUnparse_Info& info)
   // printf ("Output the test in the for statement format newinfo.inConditional() = %s \n",newinfo.inConditional() ? "true" : "false");
   // curprint (" /* test */ ");
      SgStatement *test_stmt = for_stmt->get_test();
-     ROSE_ASSERT(test_stmt != NULL);
+     if(test_stmt == NULL)
+        test_stmt = SageBuilder::buildExprStatement(SageBuilder::buildBoolValExp(true));
   // if ( test_stmt != NULL )
      SgUnparse_Info testinfo(info);
      testinfo.set_SkipSemiColon();

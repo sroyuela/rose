@@ -40,7 +40,7 @@ class AstNodePtr {
     { return repr < that.repr; }
   virtual void print() const // for debugging
     { std::cerr << AstToString(*this); }
-  ~AstNodePtr() {}
+  virtual ~AstNodePtr() {}
   void * get_ptr() const { return repr; }
 };
 #define AST_NULL AstNodePtr()
@@ -60,6 +60,7 @@ class AstNodeType {
 //! This is the base class for anyone who wants to be notified when AST nodes are being copied.
 class AstObserver {
   public:
+   virtual ~AstObserver() {}
    virtual void ObserveCopyAst( AstInterfaceImpl& fa, const AstNodePtr& orig, const AstNodePtr& n) = 0;
 };
 
@@ -346,6 +347,7 @@ typedef AstInterface::AstTypeList AstTypeList;
 class ProcessAstNode
 {
   public:
+   virtual ~ProcessAstNode() {}
     //! return true if asking the traversal to continue; false otherwise
    virtual bool Traverse( AstInterface &fa, const AstNodePtr& n, 
                              AstInterface::TraversalVisitType t) = 0;
@@ -360,6 +362,7 @@ bool ReadAstTraverse(AstInterface& fa, const AstNodePtr& root,
 class TransformAstTree
 {
  public:
+  virtual ~TransformAstTree() {}
     //! return true if asking the traversal to continue; false otherwise
   virtual bool operator()( AstInterface& fa, const AstNodePtr& n, 
                            AstNodePtr& result) = 0;

@@ -1,0 +1,35 @@
+digraph G {
+0 [label="0"];
+1 [label="1"];
+2 [label="2"];
+3 [label="3"];
+4 [label="4"];
+5 [label="5"];
+6 [label="6"];
+7 [label="7"];
+8 [label="8"];
+9 [label="If-Then"];
+10 [label="Block"];
+11 [label="Block"];
+12 [label="If-Then-Else"];
+13 [label="Block"];
+14 [label="Self-loop"];
+15 [label="If-Then"];
+16 [label="Block"];
+9->5  [label="0"];
+9->6  [label="1"];
+10->0  [label="3"];
+10->1  [label="4"];
+11->9  [label="3"];
+11->7  [label="4"];
+12->3  [label="0"];
+12->4  [label="1"];
+12->11  [label="2"];
+13->12  [label="3"];
+13->8  [label="4"];
+14->2  [label="0"];
+15->10  [label="0"];
+15->14  [label="1"];
+16->15  [label="3"];
+16->13  [label="4"];
+}
