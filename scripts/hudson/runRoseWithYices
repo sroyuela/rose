@@ -257,7 +257,7 @@ case "$ROSE_TEST_BUILD_STYLE" in
 "make/check/install-minimal"|"make/check/install-full")
 
     make -j${NUM_PROCESS} -C src/
-    make check -j${NUM_PROCESS} -C projects/FaultToleranceFramework/
+    make check -j${NUM_PROCESS} -C projects/uniformSourceBinaryAnalysis
     make yicesSemanticsExe.passed -j${NUM_PROCESS} -C tests/roseTests/binaryTests
     make yicesSemanticsLib.passed -j${NUM_PROCESS} -C tests/roseTests/binaryTests
  ;;
