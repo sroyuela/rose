@@ -9,14 +9,6 @@ libroseft_a_SOURCES = \
 			Transform/ft_trans.C \
 			FaultHandlingPolicy.C \
 			FaultHandlingSpec.C
-			
-libroseft_a_include_HEADERS = \
-	$(top_srcdir)/projects/FaultToleranceFramework/include/TI.h \
-	$(top_srcdir)/projects/FaultToleranceFramework/include/ft_common.h \
-	$(top_srcdir)/projects/FaultToleranceFram ework/include/Transform/ft_transform.h
-
-libroseft_a_includedir = \
-	$(top_srcdir)/projects/FaultToleranceFramework/include
 
 LDADD = \
 	$(ROSE_LIBS) 
