@@ -12,6 +12,7 @@
 #include "YicesSolver.h"
 
 #include "StructAnal.h"
+#include "Analysis/ft_analysis.h"
 
 using CppAD::AD;
 using namespace std;
